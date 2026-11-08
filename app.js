@@ -1,121 +1,55 @@
-/*------------------------ Cached Element References ------------------------*/
-const squreEls = document.querySelectorAll('.sqr')
-const resetBtnEl = document.querySelector('#reset')
+/*------------- Constants --------------------------------*/
+
+
+
+/*--------- Variables (state) ----------------------------*/
+let currentPlayer = 'X'
+
+
+/*----- Cached Element References ------------------------*/
 const messageEl = document.querySelector('#message')
 
-/*-------------------------------- Constants --------------------------------*/
-const board = [
-    '', '', '',
-    '', '', '',
-    '', '', ''
-]
+const sqr0El = document.getElementById('0')
+const sqr1El = document.getElementById('1')
+const sqr2El = document.getElementById('2')
+const sqr3El = document.getElementById('3')
+const sqr4El = document.getElementById('4')
+const sqr5El = document.getElementById('5')
+const sqr6El = document.getElementById('6')
+const sqr7El = document.getElementById('7')
+const sqr8El = document.getElementById('8')
 
-const winningCombos = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
+// console.log(sqr1El, sqr2El, sqr3El, sqr4El, sqr5El, sqr6El, sqr7El, sqr8El)
 
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-
-    // Diagonals
-    [0, 4, 8],
-    [2, 4, 6]
-]
-
-/*---------------------------- Variables (state) ----------------------------*/
-let turn = 'X'
-let winner = false
-let tie = false
+/*------------- Functions --------------------------------*/
+messageEl.textContent = `It's ${currentPlayer}'s turn`
 
 
-/*-------------------------------- Functions --------------------------------*/
-function render() {
-    updateBoard()
-    updateMessage()
-}
-
-function updateBoard() {
-    board.forEach((cell, index) => {
-        squreEls[index].textContent = cell
-    })
-}
-
-function updateMessage() {
-    if (!winner && !tie) {
-        messageEl.textContent = `Its ${turn} turn`
-    } else if (!winner && tie) {
-        messageEl.textContent = 'Its a Tie!'
-    } else {
-        messageEl.textContent = `${turn} Won!`
-    }
-}
-
-function handleClick(event) {
-    if (event.target.textContent) return;
-    // already a winner for a game
-    if (winner) return;
-    const squreIndex = event.target.id
-
-    placePiece(squreIndex)
-    checkForWinner()
-    checkForTie()
-    switchPlayerTurn()
-    updateBoard()
-    updateMessage()
-}
-
-function placePiece(index) {
-    board[index] = turn
-    console.log(board)
-}
-
-function checkForWinner() {
-    for (let combo of winningCombos) {
-        console.log(combo)
-        if (board[combo[0]] !== '' && board[combo[0]] === board[combo[1]] && board[combo[0]] === board[combo[2]]) {
-            winner = true
-        }
-    }
-    console.log('is winner: ', winner)
-}
-
-function checkForTie() {
-    if (winner) return;
-
-    // check for all items in array, if all truthy then its a tie
-    tie = board.every((item) => item)
-
-    console.log('is tie ', tie)
-}
-
-function switchPlayerTurn() {
-    if (winner) return;
-
-    if (turn === 'X') {
-        turn = 'O'
-    } else if (turn === 'O') {
-        turn = 'X'
-    }
-
-    console.log('Current turn: ', turn)
-}
-
-function init() {
-    turn = 'X'
-    winner = false
-    tie = false
-    board.fill('')
-
-
-    render()
-}
-
-init()
-/*----------------------------- Event Listeners -----------------------------*/
-for (let squreEl of squreEls) {
-    squreEl.addEventListener('click', handleClick)
-}
-
-resetBtnEl.addEventListener('click', init)
+/*---------- Event Listeners -----------------------------*/
+sqr0El.addEventListener('click', () => {
+    sqr0El.textContent = currentPlayer
+})
+sqr1El.addEventListener('click', () => {
+    sqr1El.textContent = currentPlayer
+})
+sqr2El.addEventListener('click', () => {
+    sqr2El.textContent = currentPlayer
+})
+sqr3El.addEventListener('click', () => {
+    sqr3El.textContent = currentPlayer
+})
+sqr4El.addEventListener('click', () => {
+    sqr4El.textContent = currentPlayer
+})
+sqr5El.addEventListener('click', () => {
+    sqr5El.textContent = currentPlayer
+})
+sqr6El.addEventListener('click', () => {
+    sqr6El.textContent = currentPlayer
+})
+sqr7El.addEventListener('click', () => {
+    sqr7El.textContent = currentPlayer
+})
+sqr8El.addEventListener('click', () => {
+    sqr8El.textContent = currentPlayer
+})
